@@ -1,0 +1,392 @@
+/* 
+   ==========================================================================
+   bharaniportfolio - White & Emerald Green Professional Design System
+   ========================================================================== 
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* === WHITE + EMERALD GREEN THEME === */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f0fdf8;
+  --bg-tertiary: #dcfce7;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0fdf8;
+
+  /* Text */
+  --text-primary: #052e16;
+  --text-secondary: #166534;
+  --text-muted: #6ee7b7;
+
+  /* Emerald Green Accent Palette */
+  --accent-primary:  #059669;   /* emerald-600 – primary green  */
+  --accent-light:    #059669;
+  --accent-mid:      #34d399;   /* emerald-400 – lighter green  */
+  --accent-gradient:      #34d399;
+  --accent-soft:     #ecfdf5;   /* emerald tint – background wash */
+  --accent-mint:     #6ee7b7;   /* emerald-300  */
+  --accent-gradient: linear-gradient(135deg, #059669 0%, #34d399 100%);
+  --accent-gradient-soft: linear-gradient(135deg, #047857 0%, #34d399 100%);
+  --accent-glow:     rgba(5, 150, 105, 0.12);
+
+  /* Borders */
+  --border-light:  rgba(5, 150, 105, 0.08);
+  --border-medium: rgba(5, 150, 105, 0.15);
+  --border-active: rgba(5, 150, 105, 0.30);
+
+  /* Typography */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body:    'Inter',  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Layout */
+  --container-max-width: 1200px;
+  --nav-height: 72px;
+
+  /* Transitions */
+  --transition-fast:   0.2s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow:   0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shadows – emerald-tinted */
+  --shadow-xs: 0 1px 3px  rgba(5, 150, 105, 0.06);
+  --shadow-sm: 0 2px 8px  rgba(5, 150, 105, 0.08), 0 1px 3px rgba(5, 150, 105, 0.05);
+  --shadow-md: 0 8px 24px rgba(5, 150, 105, 0.10), 0 2px 8px rgba(5, 150, 105, 0.06);
+  --shadow-lg: 0 20px 48px rgba(5, 150, 105, 0.13), 0 8px 16px rgba(5, 150, 105, 0.07);
+  --shadow-xl: 0 32px 64px rgba(5, 150, 105, 0.16), 0 12px 24px rgba(5, 150, 105, 0.09);
+  --shadow-blue: 0 8px 24px rgba(5, 150, 105, 0.28);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle top-right and bottom-left warm blue glow blobs */
+body::before {
+  content: '';
+  position: fixed;
+  top: -8%;
+  right: -5%;
+  width: 45%;
+  height: 45%;
+  background: radial-gradient(circle, rgba(5, 150, 105, 0.08) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -8%;
+  left: -5%;
+  width: 45%;
+  height: 45%;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.06) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+/* ============================================================
+   BUTTONS - White & Blue Theme
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  border: none;
+  outline: none;
+  letter-spacing: 0.1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.12);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: inherit;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+/* Primary – solid blue */
+.btn-primary {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  box-shadow: var(--shadow-blue);
+  border: 2px solid transparent;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(13, 59, 110, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary – white with blue border */
+.btn-secondary {
+  background: #ffffff;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b8e1dd;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gradient);
+}
+
+/* ============================================================
+   APP WRAPPER
+   ============================================================ */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: var(--nav-height);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   SECTION HEADER PATTERN
+   ============================================================ */
+.section-header {
+  margin-bottom: 56px;
+  text-align: center;
+}
+
+.section-header h2 {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 14px;
+  color: var(--text-primary);
+}
+
+.section-header h2 span {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-header p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Section divider line */
+.section-divider {
+  width: 56px;
+  height: 4px;
+  background: var(--accent-gradient);
+  border-radius: 2px;
+  margin: 16px auto 0;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.12); }
+  50%       { box-shadow: 0 0 0 12px rgba(5, 150, 105, 0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  from, to { opacity: 0; }
+  50%       { opacity: 1; }
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: scale(0.99) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Page transition */
+.page-enter {
+  animation: pageFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.scroll-reveal {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-fade      { transform: none; }
+.reveal-fade-up   { transform: translateY(36px); }
+.reveal-fade-down { transform: translateY(-36px); }
+.reveal-fade-left { transform: translateX(36px); }
+.reveal-fade-right{ transform: translateX(-36px); }
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.text-blue {
+  color: var(--accent-primary);
+}
+
+.bg-soft-blue {
+  background-color: var(--accent-soft);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .section-header h2 { font-size: 28px; }
+  .btn { padding: 10px 22px; font-size: 14px; }
+}
