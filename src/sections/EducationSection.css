@@ -57,11 +57,13 @@
   display: flex;
   gap: 18px;
   align-items: flex-start;
-  background: #ffffff;
-  border: 1.5px solid var(--border-light);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
   border-radius: 16px;
   padding: 22px 20px;
   box-shadow: var(--shadow-xs);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: var(--transition-normal);
   position: relative;
   overflow: hidden;
@@ -90,7 +92,7 @@
 }
 
 .work-card::before {
-  background: linear-gradient(180deg, #2e86c1, #1a5276);
+  background: var(--accent-gradient);
 }
 
 .edu-card-icon {
@@ -170,9 +172,9 @@
   display: inline-block;
   font-size: 11px;
   font-weight: 700;
-  color: #16a34a;
-  background: rgba(22,163,74,0.08);
-  border: 1px solid rgba(22,163,74,0.2);
+  color: var(--accent-primary);
+  background: var(--accent-soft);
+  border: 1px solid var(--border-medium);
   padding: 2px 10px;
   border-radius: 100px;
 }

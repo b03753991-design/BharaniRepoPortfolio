@@ -48,12 +48,14 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: #ffffff;
-  border: 1.5px solid var(--border-light);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
   border-radius: 14px;
   padding: 16px 20px;
   text-decoration: none;
   box-shadow: var(--shadow-xs);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: var(--transition-normal);
 }
 
@@ -73,7 +75,7 @@
   width: 44px; height: 44px;
   border-radius: 12px;
   background: var(--accent-soft);
-  border: 1px solid rgba(13,59,110,0.12);
+  border: 1px solid var(--border-medium);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,14 +113,16 @@
   gap: 7px;
   padding: 10px 20px;
   border-radius: 10px;
-  background: #ffffff;
-  border: 1.5px solid var(--border-medium);
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
   color: var(--text-secondary);
   font-family: var(--font-heading);
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
   box-shadow: var(--shadow-xs);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: var(--transition-normal);
 }
 
@@ -130,17 +134,16 @@
   box-shadow: var(--shadow-blue);
 }
 
-.contact-social-btn.linkedin:hover {
-  background: linear-gradient(135deg, #0077b5, #005885);
-}
 
 /* ---- Form Card ---- */
 .contact-form-card {
-  background: #ffffff;
-  border: 1.5px solid var(--border-light);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
   border-radius: 22px;
   padding: 40px;
   box-shadow: var(--shadow-md);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   position: relative;
   overflow: hidden;
 }
@@ -181,8 +184,8 @@
 
 .form-group input,
 .form-group textarea {
-  background: var(--bg-secondary);
-  border: 1.5px solid var(--border-medium);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-medium);
   border-radius: 10px;
   padding: 13px 16px;
   color: var(--text-primary);
@@ -201,8 +204,8 @@
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(13,59,110,0.09);
-  background: #ffffff;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .form-group input.error,

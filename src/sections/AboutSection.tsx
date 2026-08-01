@@ -5,11 +5,11 @@ import { ScrollReveal } from '../components/ScrollReveal';
 import './AboutSection.css';
 
 const skills = [
-  { name: 'C# & ASP.NET Web API', pct: 90, color: '#0d3b6e' },
-  { name: 'React.js & Tailwind CSS', pct: 92, color: '#1e6fa0' },
-  { name: 'Node.js & Express.js', pct: 86, color: '#2e86c1' },
-  { name: 'PostgreSQL & Oracle DB', pct: 84, color: '#1a5276' },
-  { name: 'MongoDB', pct: 80, color: '#0d3b6e' },
+  { name: 'C# & ASP.NET Web API', pct: 90, color: '#1b3358' },
+  { name: 'React.js & Tailwind CSS', pct: 92, color: '#427b9b' },
+  { name: 'Node.js & Express.js', pct: 86, color: '#98cbd0' },
+  { name: 'PostgreSQL & Oracle DB', pct: 84, color: '#2a5275' },
+  { name: 'MongoDB', pct: 80, color: '#1b3358' },
 ];
 
 const services = [
@@ -55,7 +55,6 @@ export const AboutSection: React.FC = () => {
             <div className="about-img-frame">
               <div className="about-img-glow" />
               <img src={bharaniImg} alt="Bharani" className="about-img" />
-              {/* Floating chip */}
               <div className="about-chip">
                 <span className="chip-dot-green" />
                 Open to Work
@@ -65,8 +64,7 @@ export const AboutSection: React.FC = () => {
 
           <ScrollReveal animation="fade-left" delay={150} triggerOnce>
             <div className="about-bio">
-              <span className="about-badge">ABOUT ME</span>
-              <h3 className="about-bio-title">Who is <span>Bharani</span>?</h3>
+              <h3 className="about-bio-title">About <span> Bharani</span></h3>
               <p className="about-bio-text">
                 I am a passionate software developer based in Tamil Nadu, India. With a deep focus on crafting interactive visual experiences, I love bridging the gap between pixel-perfect mockups and functional engineering.
               </p>
@@ -108,7 +106,10 @@ export const AboutSection: React.FC = () => {
                   <div className="skill-track">
                     <div
                       className="skill-fill"
-                      style={{ width: animated ? `${skill.pct}%` : '0%' }}
+                      style={{
+                        width: animated ? `${skill.pct}%` : '0%',
+                        background: skill.color
+                      }}
                     />
                   </div>
                 </div>

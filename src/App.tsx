@@ -5,6 +5,7 @@ import { EducationSection } from './sections/EducationSection';
 import { ProjectsSection } from './sections/ProjectsSection';
 import { AboutSection } from './sections/AboutSection';
 import { ContactSection } from './sections/ContactSection';
+import { ParticleNetworkCanvas } from './components/ParticleNetworkCanvas';
 import { Mail, Phone, MapPin, ArrowUpRight, ArrowUp } from 'lucide-react';
 import { Github, Linkedin } from './components/SocialIcons';
 import './App.css';
@@ -47,6 +48,7 @@ function App() {
 
   return (
     <>
+      <ParticleNetworkCanvas />
       <Navbar />
       <main>
         <HeroSection />
@@ -61,7 +63,7 @@ function App() {
         {/* Wave divider */}
         <div className="footer-wave">
           <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#059669" />
+            <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#090d16" />
           </svg>
         </div>
 

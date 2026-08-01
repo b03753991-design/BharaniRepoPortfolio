@@ -35,7 +35,7 @@ const projectsData: Project[] = [
     demoUrl: 'https://demo.bharani.dev/transport-system',
     githubUrl: 'https://github.com/bharani/transport-management-system',
     highlights: 'Logistics & Fleet Analytics',
-    accentColor: '#0d3b6e',
+    accentColor: '#427b9b',
   },
 ];
 
@@ -88,8 +88,7 @@ export const ProjectsSection: React.FC = () => {
           {filtered.map((project, idx) => (
             <ScrollReveal key={project.id} animation="fade-up" delay={idx * 120} triggerOnce>
               <div className="proj-card" onClick={() => setSelected(project)}>
-                {/* Card top accent */}
-                <div className="proj-card-accent" />
+                <div className="proj-card-accent" style={{ background: project.accentColor }} />
 
                 <div className="proj-badge">
                   <Sparkles size={11} /> {project.highlights}
@@ -127,7 +126,7 @@ export const ProjectsSection: React.FC = () => {
       {selected && (
         <div className="proj-modal-overlay" onClick={() => setSelected(null)}>
           <div className="proj-modal animate-fade-in" onClick={e => e.stopPropagation()}>
-            <div className="proj-modal-accent" />
+            <div className="proj-modal-accent" style={{ background: selected.accentColor }} />
             <button className="proj-modal-close" onClick={() => setSelected(null)} aria-label="Close">
               <X size={18} />
             </button>
@@ -149,23 +148,14 @@ export const ProjectsSection: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="proj-modal-section">
-                <h4>Technologies Used</h4>
-                <div className="proj-modal-tags">
-                  {selected.tags.map((tag, i) => (
-                    <span key={i} className="proj-modal-tag">{tag}</span>
-                  ))}
-                </div>
+              <div className="proj-modal-actions">
+                <a href={selected.demoUrl} target="_blank" rel="noreferrer" className="btn btn-primary">
+                  <ExternalLink size={16} /> Live Demo
+                </a>
+                <a href={selected.githubUrl} target="_blank" rel="noreferrer" className="btn btn-secondary">
+                  <Github size={16} /> Source Code
+                </a>
               </div>
-            </div>
-
-            <div className="proj-modal-actions">
-              <a href={selected.demoUrl} target="_blank" rel="noreferrer" className="btn btn-primary">
-                Live Demo <ExternalLink size={14} />
-              </a>
-              <a href={selected.githubUrl} target="_blank" rel="noreferrer" className="btn btn-secondary">
-                GitHub <Github size={14} />
-              </a>
             </div>
           </div>
         </div>

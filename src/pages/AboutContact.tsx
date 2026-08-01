@@ -122,8 +122,6 @@ export const AboutContact: React.FC = () => {
 
         <ScrollReveal animation="fade-left" delay={150} className="bio-reveal-wrapper">
           <div className="bio-wrapper">
-            <span className="about-badge">ABOUT ME</span>
-            <h2>Who is <span>Bharani</span>?</h2>
             <p className="bio-text">
               I am a passionate software developer based in Tamil Nadu, India. With a deep focus on crafting interactive visual experiences, I love bridging the gap between pixel-perfect mockups and functional engineering.
             </p>

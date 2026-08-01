@@ -40,7 +40,6 @@ export const HeroSection: React.FC = () => {
   const [charIdx,   setCharIdx]     = useState(0);
   const [deleting,  setDeleting]    = useState(false);
 
-  /* ── typewriter ── */
   useEffect(() => {
     let t: ReturnType<typeof setTimeout>;
     const cur = TITLES[titleIdx];
@@ -54,13 +53,10 @@ export const HeroSection: React.FC = () => {
     return () => clearTimeout(t);
   }, [charIdx, deleting, titleIdx]);
 
-  /* ── smooth scroll ── */
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <section id="home" className="hs-root">
-
-      {/* ── Background ── */}
       <div className="hs-bg">
         <div className="hs-blob b1" />
         <div className="hs-blob b2" />
@@ -70,46 +66,34 @@ export const HeroSection: React.FC = () => {
       </div>
 
       <div className="container hs-wrap">
-
-        {/* ══════════════ LEFT COLUMN: Content ══════════════ */}
         <div className="hs-left">
-          {/* Status pill */}
           <div className="hs-pill">
             <span className="hs-pulse" />
             <span>ASP.NET Developer Currently at NavaNala Technologies 6+ Months Experience</span>
           </div>
 
-          {/* Greeting */}
-          {/* <p className="hs-greeting">Hello, World! 👋</p> */}
-
-          {/* Name */}
           <h1 className="hs-name">
             I'm <span className="hs-gradient-text">Bharani</span>
             <span className="hs-underline-bar" />
           </h1>
 
-          {/* Typewriter */}
           <div className="hs-tw">
             <span className="hs-tw-icon">{'</>'}</span>
             <span className="hs-tw-text">{typedText}</span>
             <span className="hs-tw-cursor">|</span>
           </div>
 
-          {/* Description */}
           <p className="hs-desc">
             I craft <strong>premium digital experiences</strong> — from pixel-perfect interfaces
             to robust back-end systems. Passionate about clean architecture and breathtaking UI.
           </p>
 
-          {/* Location */}
           <div className="hs-location">
             <MapPin size={14} />
             <span>Tamil Nadu, India</span>
           </div>
 
-          {/* ── CTAs ── */}
           <div className="hs-ctas">
-            {/* PRIMARY — Hire Me */}
             <a href="mailto:bharani7224@gmail.com" className="hs-btn-hire">
               <span className="hs-btn-hire-shine" />
               <Mail size={16} />
@@ -117,20 +101,17 @@ export const HeroSection: React.FC = () => {
               <ArrowRight size={15} className="hs-arrow" />
             </a>
 
-            {/* SECONDARY — View My Work */}
             <button className="hs-btn-work" onClick={() => scrollTo('projects')}>
               <ExternalLink size={15} />
               <span>View My Work</span>
             </button>
 
-            {/* TERTIARY — Resume */}
             <a href="/resume.pdf" target="_blank" rel="noreferrer" className="hs-btn-resume">
               <Download size={14} />
               <span>Resume</span>
             </a>
           </div>
 
-          {/* Socials */}
           <div className="hs-socials">
             <span className="hs-socials-label">Find me on</span>
             <a href="https://github.com/bharani" target="_blank" rel="noreferrer" aria-label="GitHub" className="hs-social">
@@ -145,23 +126,15 @@ export const HeroSection: React.FC = () => {
           </div>
         </div>
 
-        {/* ══════════════ RIGHT COLUMN: Pyramid Tech Network ══════════════ */}
         <div className="hs-right">
           <div className="hs-pyramid-wrapper">
-            
-            {/* Animated network lines connecting nodes of the pyramid */}
             <svg className="hs-pyramid-lines" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Row 1 to Row 2 */}
               <line x1="200" y1="40" x2="135" y2="135" className="hs-py-line" />
               <line x1="200" y1="40" x2="265" y2="135" className="hs-py-line" />
-              
-              {/* Row 2 to Row 3 */}
               <line x1="135" y1="135" x2="70" y2="230" className="hs-py-line" />
               <line x1="135" y1="135" x2="200" y2="230" className="hs-py-line" />
               <line x1="265" y1="135" x2="200" y2="230" className="hs-py-line" />
               <line x1="265" y1="135" x2="330" y2="230" className="hs-py-line" />
-              
-              {/* Row 3 to Row 4 */}
               <line x1="70" y1="230" x2="20" y2="315" className="hs-py-line" />
               <line x1="70" y1="230" x2="140" y2="315" className="hs-py-line" />
               <line x1="200" y1="230" x2="140" y2="315" className="hs-py-line" />
@@ -170,7 +143,6 @@ export const HeroSection: React.FC = () => {
               <line x1="330" y1="230" x2="380" y2="315" className="hs-py-line" />
             </svg>
 
-            {/* Render tech nodes at coordinates */}
             {PYRAMID_NODES.map((node, index) => (
               <div 
                 key={node.name} 
@@ -184,13 +156,10 @@ export const HeroSection: React.FC = () => {
                 <span className="hs-py-label">{node.name}</span>
               </div>
             ))}
-
           </div>
         </div>
-
       </div>
 
-      {/* ── Scroll cue ── */}
       <div className="hs-scroll" onClick={() => scrollTo('education')}>
         <span>Scroll Down</span>
         <div className="hs-scroll-arrow-box">

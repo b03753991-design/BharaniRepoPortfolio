@@ -1,39 +1,45 @@
 /* 
    ==========================================================================
-   bharaniportfolio - White & Emerald Green Professional Design System
+   bharaniportfolio - Arctic Cyan & Deep Navy 4-Swatch Design System
    ========================================================================== 
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* === WHITE + EMERALD GREEN THEME === */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f0fdf8;
-  --bg-tertiary: #dcfce7;
+  /* === 4-SWATCH ARCTIC CYAN & DEEP NAVY THEME ===
+     Swatch 1: #F0F7F4 (Pale Mint Ice White)
+     Swatch 2: #98CBD0 (Light Sky Cyan)
+     Swatch 3: #427B9B (Steel Ocean Blue)
+     Swatch 4: #1B3358 (Deep Midnight Navy)
+  */
+
+  --bg-primary: #f0f7f4;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e5f0ee;
   --bg-card: #ffffff;
-  --bg-card-hover: #f0fdf8;
+  --bg-card-hover: #f4fbf9;
 
-  /* Text */
-  --text-primary: #052e16;
-  --text-secondary: #166534;
-  --text-muted: #6ee7b7;
+  /* Text - Swatch 4 Deep Navy & Steel Blue */
+  --text-primary: #1b3358;
+  --text-secondary: #3b5275;
+  --text-muted: #6b82a6;
 
-  /* Emerald Green Accent Palette */
-  --accent-primary:  #059669;   /* emerald-600 – primary green  */
-  --accent-light:    #059669;
-  --accent-mid:      #34d399;   /* emerald-400 – lighter green  */
-  --accent-gradient:      #34d399;
-  --accent-soft:     #ecfdf5;   /* emerald tint – background wash */
-  --accent-mint:     #6ee7b7;   /* emerald-300  */
-  --accent-gradient: linear-gradient(135deg, #059669 0%, #34d399 100%);
-  --accent-gradient-soft: linear-gradient(135deg, #047857 0%, #34d399 100%);
-  --accent-glow:     rgba(5, 150, 105, 0.12);
+  /* Accent Palette */
+  --accent-primary:  #427b9b;   /* Swatch 3: Steel Blue */
+  --accent-light:    #98cbd0;   /* Swatch 2: Light Cyan */
+  --accent-mid:      #1b3358;   /* Swatch 4: Deep Navy */
+  --accent-soft:     #eaf5f6;   /* Light background wash */
+  --accent-mint:     #98cbd0;   /* Swatch 2 */
+  
+  --accent-gradient: linear-gradient(135deg, #1b3358 0%, #427b9b 55%, #7dbdc2 100%);
+  --accent-gradient-soft: linear-gradient(135deg, #427b9b 0%, #98cbd0 100%);
+  --accent-glow:     rgba(66, 123, 155, 0.15);
 
   /* Borders */
-  --border-light:  rgba(5, 150, 105, 0.08);
-  --border-medium: rgba(5, 150, 105, 0.15);
-  --border-active: rgba(5, 150, 105, 0.30);
+  --border-light:  rgba(66, 123, 155, 0.12);
+  --border-medium: rgba(66, 123, 155, 0.22);
+  --border-active: rgba(27, 51, 88, 0.40);
 
   /* Typography */
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -48,13 +54,13 @@
   --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow:   0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Shadows – emerald-tinted */
-  --shadow-xs: 0 1px 3px  rgba(5, 150, 105, 0.06);
-  --shadow-sm: 0 2px 8px  rgba(5, 150, 105, 0.08), 0 1px 3px rgba(5, 150, 105, 0.05);
-  --shadow-md: 0 8px 24px rgba(5, 150, 105, 0.10), 0 2px 8px rgba(5, 150, 105, 0.06);
-  --shadow-lg: 0 20px 48px rgba(5, 150, 105, 0.13), 0 8px 16px rgba(5, 150, 105, 0.07);
-  --shadow-xl: 0 32px 64px rgba(5, 150, 105, 0.16), 0 12px 24px rgba(5, 150, 105, 0.09);
-  --shadow-blue: 0 8px 24px rgba(5, 150, 105, 0.28);
+  /* Shadows – Deep Navy & Steel Blue tinted */
+  --shadow-xs: 0 1px 3px  rgba(27, 51, 88, 0.05);
+  --shadow-sm: 0 2px 8px  rgba(27, 51, 88, 0.07), 0 1px 3px rgba(66, 123, 155, 0.05);
+  --shadow-md: 0 8px 24px rgba(27, 51, 88, 0.10), 0 2px 8px rgba(66, 123, 155, 0.07);
+  --shadow-lg: 0 20px 48px rgba(27, 51, 88, 0.13), 0 8px 16px rgba(66, 123, 155, 0.08);
+  --shadow-xl: 0 32px 64px rgba(27, 51, 88, 0.16), 0 12px 24px rgba(66, 123, 155, 0.10);
+  --shadow-blue: 0 8px 24px rgba(66, 123, 155, 0.28);
 }
 
 /* ============================================================
@@ -68,6 +74,7 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--bg-primary);
 }
 
 body {
@@ -80,15 +87,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Subtle top-right and bottom-left warm blue glow blobs */
+/* Vibrant glowing background blobs for dark mode */
 body::before {
   content: '';
   position: fixed;
-  top: -8%;
+  top: -10%;
   right: -5%;
-  width: 45%;
-  height: 45%;
-  background: radial-gradient(circle, rgba(5, 150, 105, 0.08) 0%, transparent 70%);
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
   z-index: -1;
   pointer-events: none;
 }
@@ -96,11 +103,11 @@ body::before {
 body::after {
   content: '';
   position: fixed;
-  bottom: -8%;
+  bottom: -10%;
   left: -5%;
-  width: 45%;
-  height: 45%;
-  background: radial-gradient(circle, rgba(52, 211, 153, 0.06) 0%, transparent 70%);
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.10) 0%, transparent 70%);
   z-index: -1;
   pointer-events: none;
 }
@@ -196,6 +203,8 @@ a {
   border-radius: 16px;
   padding: 24px;
   box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: var(--transition-normal);
 }
 
@@ -319,8 +328,8 @@ a {
 }
 
 @keyframes pulse-ring {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.12); }
-  50%       { box-shadow: 0 0 0 12px rgba(5, 150, 105, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.12); }
+  50%       { box-shadow: 0 0 0 12px rgba(37, 99, 235, 0); }
 }
 
 @keyframes slideDown {
