@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { Github, Linkedin } from '../components/SocialIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { PORTFOLIO_DATA } from '../portfolioData';
 import './ContactSection.css';
 
 interface FormState {
@@ -18,41 +19,45 @@ interface FormErrors {
   message?: string;
 }
 
-const contactInfo = [
-  {
-    icon: <Mail size={20} />,
-    label: 'Email',
-    value: 'bharani7224@gmail.com',
-    href: 'mailto:bharani7224@gmail.com',
-  },
-  {
-    icon: <Phone size={20} />,
-    label: 'Phone',
-    value: '+91 93606 80467',
-    href: 'tel:+919360680467',
-  },
-  {
-    icon: <MapPin size={20} />,
-    label: 'Location',
-    value: 'Tamil Nadu, India',
-    href: '#',
-  },
-];
-
 export const ContactSection: React.FC = () => {
+  const profile = PORTFOLIO_DATA.profile;
   const [form, setForm] = useState<FormState>({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  const contactCards = [
+    {
+      icon: <Mail size={20} />,
+      label: 'Email',
+      value: profile.email,
+      href: `mailto:${profile.email}`,
+    },
+    {
+      icon: <Phone size={20} />,
+      label: 'Phone',
+      value: profile.phone,
+      href: `tel:${profile.phone.replace(/\s+/g, '')}`,
+    },
+    {
+      icon: <MapPin size={20} />,
+      label: 'Location',
+      value: profile.location,
+      href: '#',
+    },
+  ];
+
+  const githubSocial = profile.socials.find(s => s.platform === 'GitHub');
+  const linkedinSocial = profile.socials.find(s => s.platform === 'LinkedIn');
+
   const validate = (): boolean => {
     const e: FormErrors = {};
     if (!form.name.trim()) e.name = 'Name is required.';
     if (!form.email.trim()) e.email = 'Email is required.';
-    else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Enter a valid email.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Enter a valid email address.';
     if (!form.subject.trim()) e.subject = 'Subject is required.';
     if (!form.message.trim()) e.message = 'Message cannot be empty.';
-    else if (form.message.length < 10) e.message = 'At least 10 characters.';
+    else if (form.message.trim().length < 10) e.message = 'Message must be at least 10 characters.';
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -72,7 +77,7 @@ export const ContactSection: React.FC = () => {
       setSubmitSuccess(true);
       setForm({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setSubmitSuccess(false), 6000);
-    }, 1500);
+    }, 1200);
   };
 
   return (
@@ -96,7 +101,7 @@ export const ContactSection: React.FC = () => {
               </p>
 
               <div className="contact-cards">
-                {contactInfo.map(({ icon, label, value, href }) => (
+                {contactCards.map(({ icon, label, value, href }) => (
                   <a key={label} href={href} className="contact-info-card">
                     <div className="ci-icon">{icon}</div>
                     <div>
@@ -109,12 +114,16 @@ export const ContactSection: React.FC = () => {
 
               {/* Social links */}
               <div className="contact-socials">
-                <a href="https://github.com/bharani" target="_blank" rel="noreferrer" aria-label="GitHub" className="contact-social-btn">
-                  <Github size={18} /> GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/bharani-dharan-d-26624a293" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="contact-social-btn linkedin">
-                  <Linkedin size={18} /> LinkedIn
-                </a>
+                {githubSocial && (
+                  <a href={githubSocial.url} target="_blank" rel="noreferrer" aria-label="GitHub" className="contact-social-btn">
+                    <Github size={18} /> GitHub
+                  </a>
+                )}
+                {linkedinSocial && (
+                  <a href={linkedinSocial.url} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="contact-social-btn linkedin">
+                    <Linkedin size={18} /> LinkedIn
+                  </a>
+                )}
               </div>
             </div>
           </ScrollReveal>

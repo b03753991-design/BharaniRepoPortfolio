@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Code2 } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 import './Navbar.css';
 
 const NAV_ITEMS = [
@@ -71,22 +72,28 @@ export const Navbar: React.FC = () => {
           ))}
         </div>
 
-        {/* CTA */}
-        <button
-          className="nav-cta btn btn-primary"
-          onClick={() => scrollTo('contact')}
-        >
-          Hire Me
-        </button>
+        {/* Desktop Actions: Theme Toggle & CTA */}
+        <div className="navbar-actions">
+          <ThemeToggle />
+          <button
+            className="nav-cta btn btn-primary"
+            onClick={() => scrollTo('contact')}
+          >
+            Hire Me
+          </button>
+        </div>
 
-        {/* Mobile Toggle */}
-        <button
-          className="mobile-toggle"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Mobile Actions: Theme Toggle & Hamburger */}
+        <div className="mobile-header-actions">
+          <ThemeToggle className="mobile-theme-toggle" />
+          <button
+            className="mobile-toggle"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer */}
@@ -100,12 +107,14 @@ export const Navbar: React.FC = () => {
             {label}
           </button>
         ))}
-        <button
-          className="btn btn-primary mobile-cta"
-          onClick={() => scrollTo('contact')}
-        >
-          Hire Me
-        </button>
+        <div className="mobile-drawer-bottom">
+          <button
+            className="btn btn-primary mobile-cta"
+            onClick={() => scrollTo('contact')}
+          >
+            Hire Me
+          </button>
+        </div>
       </div>
     </nav>
   );

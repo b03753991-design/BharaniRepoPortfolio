@@ -32,28 +32,28 @@
 .b1 {
   width: 600px; height: 600px;
   top: -160px; left: -160px;
-  background: radial-gradient(circle, rgba(5,150,105,0.14) 0%, rgba(52,211,153,0.06) 60%, transparent 100%);
+  background: radial-gradient(circle, var(--blob-1) 0%, rgba(192, 107, 255, 0.08) 60%, transparent 100%);
   animation: blobFloat 12s ease-in-out infinite;
 }
 
 .b2 {
   width: 480px; height: 480px;
   top: 10%; right: -120px;
-  background: radial-gradient(circle, rgba(52,211,153,0.10) 0%, rgba(5,150,105,0.04) 60%, transparent 100%);
+  background: radial-gradient(circle, var(--blob-2) 0%, rgba(122, 28, 172, 0.06) 60%, transparent 100%);
   animation: blobFloat 10s ease-in-out infinite reverse;
 }
 
 .b3 {
   width: 380px; height: 380px;
   bottom: -100px; left: 35%;
-  background: radial-gradient(circle, rgba(5,150,105,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--blob-3) 0%, transparent 70%);
   animation: blobFloat 14s ease-in-out infinite 2s;
 }
 
 .hs-grid {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(5,150,105,0.07) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 30%, transparent 100%);
 }
@@ -111,8 +111,8 @@
 .hs-pulse {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: #427b9b;
-  box-shadow: 0 0 0 3px rgba(66,123,155,0.22);
+  background: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
   animation: pulse-ring 2s infinite;
   flex-shrink: 0;
 }
@@ -178,7 +178,7 @@
   color: var(--accent-primary);
   font-weight: 700;
   font-size: 13px;
-  background: rgba(5,150,105,0.10);
+  background: var(--accent-soft);
   padding: 2px 7px;
   border-radius: 5px;
 }
@@ -242,26 +242,17 @@
   cursor: pointer;
   text-decoration: none;
   overflow: hidden;
-  box-shadow: 0 8px 28px rgba(5,150,105,0.38), 0 2px 8px rgba(5,150,105,0.20);
+  box-shadow: 0 8px 28px var(--accent-glow), 0 2px 8px var(--accent-glow);
   transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
 }
 
 .hs-btn-hire-shine {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.22) 55%, transparent 70%);
-  background-size: 200% 100%;
-  background-position: -100% 0;
-  transition: background-position 0.55s ease;
-}
-
-.hs-btn-hire:hover .hs-btn-hire-shine {
-  background-position: 200% 0;
+  display: none;
 }
 
 .hs-btn-hire:hover {
   transform: translateY(-3px);
-  box-shadow: 0 14px 36px rgba(5,150,105,0.48), 0 4px 12px rgba(5,150,105,0.22);
+  box-shadow: 0 14px 36px var(--accent-glow), 0 4px 12px var(--accent-glow);
 }
 
 .hs-btn-hire:hover .hs-arrow {
@@ -304,7 +295,7 @@
   color: #fff;
   border-color: transparent;
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(5,150,105,0.30);
+  box-shadow: 0 8px 24px var(--accent-glow);
 }
 
 .hs-btn-work:hover::before { opacity: 1; }
@@ -358,7 +349,7 @@
   width: 38px; height: 38px;
   border-radius: 10px;
   border: 1.5px solid var(--border-medium);
-  background: #fff;
+  background: var(--bg-card);
   color: var(--text-secondary);
   box-shadow: var(--shadow-xs);
   transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
@@ -400,7 +391,7 @@
 }
 
 .hs-py-line {
-  stroke: rgba(16, 185, 129, 0.45);
+  stroke: rgba(122, 28, 172, 0.55);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-dasharray: 8 6;
@@ -431,30 +422,100 @@
 }
 
 /* Individual node alignments using responsive percentages */
-/* Row 1 */
-.p-1-1 { top: 11.4%; left: 50%; }
+/* Row 1 (Apex) */
+.p-1-1 { top: 12%; left: 36%; }
+.p-1-2 { top: 12%; left: 64%; }
 
 /* Row 2 */
-.p-2-1 { top: 38.5%; left: 33.75%; }
-.p-2-2 { top: 38.5%; left: 66.25%; }
+.p-2-1 { top: 38%; left: 20%; }
+.p-2-2 { top: 38%; left: 50%; }
+.p-2-3 { top: 38%; left: 80%; }
 
 /* Row 3 */
-.p-3-1 { top: 65.7%; left: 17.5%; }
-.p-3-2 { top: 65.7%; left: 50%; }
-.p-3-3 { top: 65.7%; left: 82.5%; }
+.p-3-1 { top: 64%; left: 16%; }
+.p-3-2 { top: 64%; left: 50%; }
+.p-3-3 { top: 64%; left: 84%; }
 
-/* Row 4 */
-.p-4-1 { top: 90%; left: 5%; }
-.p-4-2 { top: 90%; left: 35%; }
-.p-4-3 { top: 90%; left: 65%; }
-.p-4-4 { top: 90%; left: 95%; }
+/* Row 4 (Base) */
+.p-4-1 { top: 89%; left: 14%; }
+.p-4-2 { top: 89%; left: 50%; }
+.p-4-3 { top: 89%; left: 86%; }
+
+/* Tooltip on hover */
+.hs-py-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  opacity: 0;
+  pointer-events: none;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 6px 12px;
+  min-width: 140px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.22);
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 30;
+}
+
+.hs-py-node:hover .hs-py-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.p-1-1 .hs-py-tooltip,
+.p-1-2 .hs-py-tooltip {
+  bottom: auto;
+  top: calc(100% + 30px);
+}
+
+.hs-py-tooltip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.hs-py-tooltip-name {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.hs-py-tooltip-pct {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-primary);
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+.hs-py-tooltip-track {
+  width: 100%;
+  height: 4px;
+  background: var(--border-light);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.hs-py-tooltip-fill {
+  height: 100%;
+  background: var(--accent-gradient);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
 
 /* The coin container */
 .hs-py-coin {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--bg-card);
   border: 1.5px solid var(--border-medium);
   box-shadow: var(--shadow-sm);
   display: flex;
@@ -528,6 +589,42 @@
   box-shadow: 0 4px 12px rgba(132, 204, 22, 0.15);
 }
 
+.tech-efcore { color: #6366f1; }
+.tech-efcore-bg {
+  border-color: rgba(99, 102, 241, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
+.tech-htmlcss { color: #ea580c; }
+.tech-htmlcss-bg {
+  border-color: rgba(234, 88, 12, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.15);
+}
+
+.tech-cleanarch { color: #059669; }
+.tech-cleanarch-bg {
+  border-color: rgba(5, 150, 105, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.15);
+}
+
+.tech-jwt { color: #c026d3; }
+.tech-jwt-bg {
+  border-color: rgba(192, 38, 211, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(192, 38, 211, 0.15);
+}
+
+.tech-git { color: #e11d48; }
+.tech-git-bg {
+  border-color: rgba(225, 29, 72, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.15);
+}
+
+.tech-ocr { color: #0891b2; }
+.tech-ocr-bg {
+  border-color: rgba(8, 145, 178, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.15);
+}
+
 /* Labels below coins */
 .hs-py-label {
   font-family: var(--font-heading);
@@ -536,7 +633,7 @@
   color: var(--text-secondary);
   letter-spacing: 0.3px;
   margin-top: 6px;
-  background: #ffffff;
+  background: var(--bg-card);
   padding: 2px 8px;
   border-radius: 100px;
   border: 1px solid var(--border-light);
@@ -693,7 +790,7 @@
   height: 38px;
   border-radius: 50%;
   border: 1.5px solid var(--border-medium);
-  background: #ffffff;
+  background: var(--bg-card);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -710,7 +807,7 @@
 .hs-scroll:hover .hs-scroll-arrow-box {
   border-color: var(--accent-primary);
   background: var(--accent-soft);
-  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+  box-shadow: 0 4px 16px var(--accent-glow);
 }
 
 /* ══════════════════════════════════════════
@@ -733,10 +830,10 @@
 
 @keyframes pulseBox {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.15);
+    box-shadow: 0 0 0 0 var(--accent-glow);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(5, 150, 105, 0);
+    box-shadow: 0 0 0 8px transparent;
   }
 }
 

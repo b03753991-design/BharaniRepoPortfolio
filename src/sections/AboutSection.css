@@ -43,7 +43,7 @@
   object-fit: cover;
   border-radius: 22px;
   z-index: 2;
-  border: 3px solid #ffffff;
+  border: 3px solid var(--border-medium);
   box-shadow: var(--shadow-lg);
 }
 
@@ -56,7 +56,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: #ffffff;
+  background: var(--bg-card);
   border: 1.5px solid var(--border-medium);
   border-radius: 100px;
   padding: 7px 18px;
@@ -86,7 +86,7 @@
   font-weight: 700;
   color: var(--accent-primary);
   background: var(--accent-soft);
-  border: 1px solid rgba(13,59,110,0.12);
+  border: 1px solid var(--border-medium);
   letter-spacing: 2px;
   padding: 5px 14px;
   border-radius: 100px;
@@ -205,10 +205,10 @@
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  max-width: 750px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 36px;
+  max-width: 920px;
 }
 
 .skill-row { display: flex; flex-direction: column; gap: 8px; }
@@ -216,16 +216,18 @@
 .skill-row-header {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
   font-size: 13px;
   font-weight: 600;
 }
 
 .skill-row-name { color: var(--text-primary); }
-.skill-row-pct { color: var(--accent-primary); font-weight: 700; }
+.skill-row-pct { color: var(--accent-primary); font-weight: 700; flex-shrink: 0; }
 
 .skill-track {
   height: 8px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--border-light);
   border-radius: 100px;
   overflow: visible;
   position: relative;
@@ -285,7 +287,7 @@
   width: 50px; height: 50px;
   border-radius: 14px;
   background: var(--accent-soft);
-  border: 1px solid rgba(13,59,110,0.12);
+  border: 1px solid var(--border-medium);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -327,7 +329,11 @@
 
   .about-bio { text-align: center; }
   .about-info { justify-content: center; }
-  .skills-card { max-width: 100%; }
+  .skills-card { 
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 100%; 
+  }
 }
 
 @media (max-width: 600px) {

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 interface Particle {
   x: number;
@@ -7,15 +8,17 @@ interface Particle {
   vy: number;
   radius: number;
   baseAlpha: number;
+  colorType: number; // 0: primary purple (#7A1CAC), 1: violet glow (#c06bff)
 }
 
-interface ParticleNetworkCanvasProps {
-  particleColor?: string; // e.g. '#427B9B' or '66, 123, 155'
-  particleCount?: number;
-}
-
-export const ParticleNetworkCanvas: React.FC<ParticleNetworkCanvasProps> = () => {
+export const ParticleNetworkCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const { theme } = useTheme();
+  const themeRef = useRef(theme);
+
+  useEffect(() => {
+    themeRef.current = theme;
+  }, [theme]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -48,6 +51,7 @@ export const ParticleNetworkCanvas: React.FC<ParticleNetworkCanvasProps> = () =>
           vy: (Math.random() - 0.5) * 0.7,
           radius: Math.random() * 2 + 1.5,
           baseAlpha: Math.random() * 0.4 + 0.3,
+          colorType: Math.random() > 0.4 ? 0 : 1,
         });
       }
     };
@@ -75,14 +79,10 @@ export const ParticleNetworkCanvas: React.FC<ParticleNetworkCanvasProps> = () =>
 
     createParticles();
 
-    // RGB values for theme colors:
-    // Swatch 3 (Steel Blue): rgb(66, 123, 155) -> #427B9B
-    // Swatch 2 (Light Cyan): rgb(151, 203, 208) -> #97CBD0
-    // Swatch 4 (Deep Navy): rgb(27, 51, 88) -> #1B3358
-
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
+      const isDark = themeRef.current === 'dark';
       const maxDistance = 140;
       const mouseMaxDistance = 160;
 
@@ -97,10 +97,20 @@ export const ParticleNetworkCanvas: React.FC<ParticleNetworkCanvasProps> = () =>
         if (p.x < 0 || p.x > width) p.vx *= -1;
         if (p.y < 0 || p.y > height) p.vy *= -1;
 
-        // Draw particle dot
+        // Draw particle dot in #7A1CAC theme colors
+        const alpha = isDark ? p.baseAlpha : p.baseAlpha * 0.55;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(56, 189, 248, ${p.baseAlpha})`;
+
+        if (p.colorType === 0) {
+          // #7A1CAC (rgb: 122, 28, 172)
+          ctx.fillStyle = `rgba(122, 28, 172, ${alpha})`;
+        } else {
+          // Glowing violet (rgb: 192, 107, 255 in dark, 144, 22, 205 in light)
+          ctx.fillStyle = isDark 
+            ? `rgba(192, 107, 255, ${alpha * 1.1})` 
+            : `rgba(144, 22, 205, ${alpha})`;
+        }
         ctx.fill();
 
         // Connect particles to each other
@@ -111,11 +121,11 @@ export const ParticleNetworkCanvas: React.FC<ParticleNetworkCanvasProps> = () =>
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxDistance) {
-            const alpha = (1 - dist / maxDistance) * 0.30;
+            const lineAlpha = (1 - dist / maxDistance) * (isDark ? 0.32 : 0.16);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+            ctx.strokeStyle = `rgba(122, 28, 172, ${lineAlpha})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -127,11 +137,13 @@ export const ParticleNetworkCanvas: React.FC<ParticleNetworkCanvasProps> = () =>
         const mDist = Math.sqrt(mDx * mDx + mDy * mDy);
 
         if (mDist < mouseMaxDistance) {
-          const mAlpha = (1 - mDist / mouseMaxDistance) * 0.60;
+          const mAlpha = (1 - mDist / mouseMaxDistance) * (isDark ? 0.65 : 0.35);
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(139, 92, 246, ${mAlpha})`;
+          ctx.strokeStyle = isDark
+            ? `rgba(192, 107, 255, ${mAlpha})`
+            : `rgba(122, 28, 172, ${mAlpha})`;
           ctx.lineWidth = 1.4;
           ctx.stroke();
         }

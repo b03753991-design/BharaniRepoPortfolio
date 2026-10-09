@@ -2,56 +2,154 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, Download, ExternalLink, Mail, MapPin, ChevronDown } from 'lucide-react';
 import { Github, Linkedin } from '../components/SocialIcons';
 import { 
-  ReactIcon, NetCoreIcon, PostgresIcon, OracleIcon, 
-  NodejsIcon, ExpressIcon, PostmanIcon, SwaggerIcon, ApiIcon, LinqIcon
+  ReactIcon, NetCoreIcon, PostgresIcon, 
+  ApiIcon, LinqIcon, EfCoreIcon, HtmlCssIcon, 
+  CleanArchIcon, JwtIcon, GitIcon, OcrIcon
 } from '../components/TechIcons';
+import { PORTFOLIO_DATA } from '../portfolioData';
 import './HeroSection.css';
 
-const TITLES = [
-  'Full Stack Developer',
-  'React & ASP.NET Specialist',
-  'UI / UX Enthusiast',
-  'Problem Solver',
-];
+interface NodeConfig {
+  name: string;
+  tier: number;
+  proficiency: number;
+  icon: React.ReactElement;
+  bgClass: string;
+  posClass: string;
+}
 
-const PYRAMID_NODES = [
-  // Row 1 (Apex)
-  { name: 'React', icon: <ReactIcon size={24} className="tech-react" />, bgClass: 'tech-react-bg', posClass: 'p-1-1' },
-  
-  // Row 2
-  { name: 'ASP.NET', icon: <NetCoreIcon size={24} className="tech-netcore" />, bgClass: 'tech-netcore-bg', posClass: 'p-2-1' },
-  { name: 'Node.js', icon: <NodejsIcon size={24} className="tech-node" />, bgClass: 'tech-node-bg', posClass: 'p-2-2' },
-  
-  // Row 3
-  { name: 'Express.js', icon: <ExpressIcon size={22} className="tech-express" />, bgClass: 'tech-express-bg', posClass: 'p-3-1' },
-  { name: 'PostgreSQL', icon: <PostgresIcon size={22} className="tech-postgres" />, bgClass: 'tech-postgres-bg', posClass: 'p-3-2' },
-  { name: 'Oracle DB', icon: <OracleIcon size={22} className="tech-oracle" />, bgClass: 'tech-oracle-bg', posClass: 'p-3-3' },
-  
-  // Row 4 (Base)
-  { name: 'C# / LINQ', icon: <LinqIcon size={20} className="tech-linq" />, bgClass: 'tech-linq-bg', posClass: 'p-4-1' },
-  { name: 'APIs', icon: <ApiIcon size={20} className="tech-api" />, bgClass: 'tech-api-bg', posClass: 'p-4-2' },
-  { name: 'Postman', icon: <PostmanIcon size={20} className="tech-postman" />, bgClass: 'tech-postman-bg', posClass: 'p-4-3' },
-  { name: 'Swagger', icon: <SwaggerIcon size={20} className="tech-swagger" />, bgClass: 'tech-swagger-bg', posClass: 'p-4-4' },
+const PYRAMID_NODES: NodeConfig[] = [
+  // Tier 1 (Apex)
+  { 
+    name: 'ASP.NET Core', 
+    tier: 1, 
+    proficiency: 75, 
+    icon: <NetCoreIcon size={22} className="tech-netcore" />, 
+    bgClass: 'tech-netcore-bg', 
+    posClass: 'p-1-1' 
+  },
+  { 
+    name: 'C#', 
+    tier: 1, 
+    proficiency: 70, 
+    icon: <LinqIcon size={22} className="tech-linq" />, 
+    bgClass: 'tech-linq-bg', 
+    posClass: 'p-1-2' 
+  },
+
+  // Tier 2
+  { 
+    name: 'REST APIs', 
+    tier: 2, 
+    proficiency: 75, 
+    icon: <ApiIcon size={20} className="tech-api" />, 
+    bgClass: 'tech-api-bg', 
+    posClass: 'p-2-1' 
+  },
+  { 
+    name: 'Entity Framework Core', 
+    tier: 2, 
+    proficiency: 65, 
+    icon: <EfCoreIcon size={20} className="tech-efcore" />, 
+    bgClass: 'tech-efcore-bg', 
+    posClass: 'p-2-2' 
+  },
+  { 
+    name: 'PostgreSQL', 
+    tier: 2, 
+    proficiency: 65, 
+    icon: <PostgresIcon size={20} className="tech-postgres" />, 
+    bgClass: 'tech-postgres-bg', 
+    posClass: 'p-2-3' 
+  },
+
+  // Tier 3
+  { 
+    name: 'React', 
+    tier: 3, 
+    proficiency: 65, 
+    icon: <ReactIcon size={20} className="tech-react" />, 
+    bgClass: 'tech-react-bg', 
+    posClass: 'p-3-1' 
+  },
+  { 
+    name: 'HTML / CSS', 
+    tier: 3, 
+    proficiency: 65, 
+    icon: <HtmlCssIcon size={20} className="tech-htmlcss" />, 
+    bgClass: 'tech-htmlcss-bg', 
+    posClass: 'p-3-2' 
+  },
+  { 
+    name: 'Clean Architecture', 
+    tier: 3, 
+    proficiency: 60, 
+    icon: <CleanArchIcon size={20} className="tech-cleanarch" />, 
+    bgClass: 'tech-cleanarch-bg', 
+    posClass: 'p-3-3' 
+  },
+
+  // Tier 4 (Base)
+  { 
+    name: 'JWT Authentication', 
+    tier: 4, 
+    proficiency: 60, 
+    icon: <JwtIcon size={18} className="tech-jwt" />, 
+    bgClass: 'tech-jwt-bg', 
+    posClass: 'p-4-1' 
+  },
+  { 
+    name: 'Git / GitHub', 
+    tier: 4, 
+    proficiency: 60, 
+    icon: <GitIcon size={18} className="tech-git" />, 
+    bgClass: 'tech-git-bg', 
+    posClass: 'p-4-2' 
+  },
+  { 
+    name: 'OCR', 
+    tier: 4, 
+    proficiency: 60, 
+    icon: <OcrIcon size={18} className="tech-ocr" />, 
+    bgClass: 'tech-ocr-bg', 
+    posClass: 'p-4-3' 
+  },
 ];
 
 export const HeroSection: React.FC = () => {
-  const [typedText, setTypedText]   = useState('');
-  const [titleIdx,  setTitleIdx]    = useState(0);
-  const [charIdx,   setCharIdx]     = useState(0);
-  const [deleting,  setDeleting]    = useState(false);
+  const titles = PORTFOLIO_DATA.profile.roleTaglines;
+  const [typedText, setTypedText] = useState('');
+  const [titleIdx,  setTitleIdx]  = useState(0);
+  const [charIdx,   setCharIdx]   = useState(0);
+  const [deleting,  setDeleting]  = useState(false);
 
   useEffect(() => {
     let t: ReturnType<typeof setTimeout>;
-    const cur = TITLES[titleIdx];
+    const cur = titles[titleIdx];
     if (deleting) {
-      t = setTimeout(() => { setTypedText(cur.slice(0, charIdx - 1)); setCharIdx(p => p - 1); }, 40);
+      if (charIdx > 0) {
+        t = setTimeout(() => {
+          setTypedText(cur.slice(0, charIdx - 1));
+          setCharIdx(p => p - 1);
+        }, 40);
+      } else {
+        t = setTimeout(() => {
+          setDeleting(false);
+          setTitleIdx(p => (p + 1) % titles.length);
+        }, 300);
+      }
     } else {
-      t = setTimeout(() => { setTypedText(cur.slice(0, charIdx + 1)); setCharIdx(p => p + 1); }, 85);
+      if (charIdx < cur.length) {
+        t = setTimeout(() => {
+          setTypedText(cur.slice(0, charIdx + 1));
+          setCharIdx(p => p + 1);
+        }, 85);
+      } else {
+        t = setTimeout(() => setDeleting(true), 2400);
+      }
     }
-    if (!deleting && charIdx === cur.length)  t = setTimeout(() => setDeleting(true), 2400);
-    if (deleting  && charIdx === 0)           { setDeleting(false); setTitleIdx(p => (p + 1) % TITLES.length); }
     return () => clearTimeout(t);
-  }, [charIdx, deleting, titleIdx]);
+  }, [charIdx, deleting, titleIdx, titles]);
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
@@ -69,11 +167,11 @@ export const HeroSection: React.FC = () => {
         <div className="hs-left">
           <div className="hs-pill">
             <span className="hs-pulse" />
-            <span>ASP.NET Developer Currently at NavaNala Technologies 6+ Months Experience</span>
+            <span>{PORTFOLIO_DATA.profile.statusPill}</span>
           </div>
 
           <h1 className="hs-name">
-            I'm <span className="hs-gradient-text">Bharani</span>
+            I'm <span className="hs-gradient-text">{PORTFOLIO_DATA.profile.name}</span>
             <span className="hs-underline-bar" />
           </h1>
 
@@ -90,11 +188,11 @@ export const HeroSection: React.FC = () => {
 
           <div className="hs-location">
             <MapPin size={14} />
-            <span>Tamil Nadu, India</span>
+            <span>{PORTFOLIO_DATA.profile.location}</span>
           </div>
 
           <div className="hs-ctas">
-            <a href="mailto:bharani7224@gmail.com" className="hs-btn-hire">
+            <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('contact'); }} className="hs-btn-hire">
               <span className="hs-btn-hire-shine" />
               <Mail size={16} />
               <span>Hire Me</span>
@@ -106,7 +204,7 @@ export const HeroSection: React.FC = () => {
               <span>View My Work</span>
             </button>
 
-            <a href="/resume.pdf" target="_blank" rel="noreferrer" className="hs-btn-resume">
+            <a href={PORTFOLIO_DATA.profile.resumeUrl} target="_blank" rel="noreferrer" className="hs-btn-resume">
               <Download size={14} />
               <span>Resume</span>
             </a>
@@ -114,42 +212,86 @@ export const HeroSection: React.FC = () => {
 
           <div className="hs-socials">
             <span className="hs-socials-label">Find me on</span>
-            <a href="https://github.com/bharani" target="_blank" rel="noreferrer" aria-label="GitHub" className="hs-social">
-              <Github size={17} />
-            </a>
-            <a href="https://www.linkedin.com/in/bharani-dharan-d-26624a293" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hs-social">
-              <Linkedin size={17} />
-            </a>
-            <a href="mailto:bharani7224@gmail.com" aria-label="Email" className="hs-social">
-              <Mail size={17} />
-            </a>
+            {PORTFOLIO_DATA.profile.socials.map((s) => (
+              <a 
+                key={s.platform} 
+                href={s.url} 
+                target={s.url.startsWith('http') ? '_blank' : undefined} 
+                rel="noreferrer" 
+                aria-label={s.label} 
+                className="hs-social"
+              >
+                {s.platform === 'GitHub' && <Github size={17} />}
+                {s.platform === 'LinkedIn' && <Linkedin size={17} />}
+                {s.platform === 'Email' && <Mail size={17} />}
+              </a>
+            ))}
           </div>
         </div>
 
         <div className="hs-right">
           <div className="hs-pyramid-wrapper">
-            <svg className="hs-pyramid-lines" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="200" y1="40" x2="135" y2="135" className="hs-py-line" />
-              <line x1="200" y1="40" x2="265" y2="135" className="hs-py-line" />
-              <line x1="135" y1="135" x2="70" y2="230" className="hs-py-line" />
-              <line x1="135" y1="135" x2="200" y2="230" className="hs-py-line" />
-              <line x1="265" y1="135" x2="200" y2="230" className="hs-py-line" />
-              <line x1="265" y1="135" x2="330" y2="230" className="hs-py-line" />
-              <line x1="70" y1="230" x2="20" y2="315" className="hs-py-line" />
-              <line x1="70" y1="230" x2="140" y2="315" className="hs-py-line" />
-              <line x1="200" y1="230" x2="140" y2="315" className="hs-py-line" />
-              <line x1="200" y1="230" x2="260" y2="315" className="hs-py-line" />
-              <line x1="330" y1="230" x2="260" y2="315" className="hs-py-line" />
-              <line x1="330" y1="230" x2="380" y2="315" className="hs-py-line" />
+            <svg className="hs-pyramid-lines" viewBox="0 0 400 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Tier 1 internal */}
+              <line x1="144" y1="43" x2="256" y2="43" className="hs-py-line" />
+
+              {/* Tier 1 to Tier 2 */}
+              <line x1="144" y1="43" x2="80" y2="137" className="hs-py-line" />
+              <line x1="144" y1="43" x2="200" y2="137" className="hs-py-line" />
+              <line x1="256" y1="43" x2="200" y2="137" className="hs-py-line" />
+              <line x1="256" y1="43" x2="320" y2="137" className="hs-py-line" />
+
+              {/* Tier 2 internal */}
+              <line x1="80" y1="137" x2="200" y2="137" className="hs-py-line" />
+              <line x1="200" y1="137" x2="320" y2="137" className="hs-py-line" />
+
+              {/* Tier 2 to Tier 3 */}
+              <line x1="80" y1="137" x2="64" y2="230" className="hs-py-line" />
+              <line x1="80" y1="137" x2="200" y2="230" className="hs-py-line" />
+              <line x1="200" y1="137" x2="64" y2="230" className="hs-py-line" />
+              <line x1="200" y1="137" x2="200" y2="230" className="hs-py-line" />
+              <line x1="200" y1="137" x2="336" y2="230" className="hs-py-line" />
+              <line x1="320" y1="137" x2="200" y2="230" className="hs-py-line" />
+              <line x1="320" y1="137" x2="336" y2="230" className="hs-py-line" />
+
+              {/* Tier 3 internal */}
+              <line x1="64" y1="230" x2="200" y2="230" className="hs-py-line" />
+              <line x1="200" y1="230" x2="336" y2="230" className="hs-py-line" />
+
+              {/* Tier 3 to Tier 4 */}
+              <line x1="64" y1="230" x2="56" y2="320" className="hs-py-line" />
+              <line x1="64" y1="230" x2="200" y2="320" className="hs-py-line" />
+              <line x1="200" y1="230" x2="56" y2="320" className="hs-py-line" />
+              <line x1="200" y1="230" x2="200" y2="320" className="hs-py-line" />
+              <line x1="200" y1="230" x2="344" y2="320" className="hs-py-line" />
+              <line x1="336" y1="230" x2="200" y2="320" className="hs-py-line" />
+              <line x1="336" y1="230" x2="344" y2="320" className="hs-py-line" />
+
+              {/* Tier 4 internal */}
+              <line x1="56" y1="320" x2="200" y2="320" className="hs-py-line" />
+              <line x1="200" y1="320" x2="344" y2="320" className="hs-py-line" />
             </svg>
 
             {PYRAMID_NODES.map((node, index) => (
               <div 
                 key={node.name} 
                 className={`hs-py-node ${node.posClass}`} 
-                style={{ animationDelay: `${index * -0.4}s` }}
-                title={node.name}
+                style={{ animationDelay: `${index * -0.35}s` }}
               >
+                {/* Tooltip on hover */}
+                <div className="hs-py-tooltip">
+                  <div className="hs-py-tooltip-header">
+                    <span className="hs-py-tooltip-name">{node.name}</span>
+                    <span className="hs-py-tooltip-pct">{node.proficiency}%</span>
+                  </div>
+                  <div className="hs-py-tooltip-track">
+                    <div 
+                      className="hs-py-tooltip-fill" 
+                      style={{ width: `${node.proficiency}%` }} 
+                    />
+                  </div>
+                </div>
+
                 <div className={`hs-py-coin ${node.bgClass}`}>
                   {node.icon}
                 </div>

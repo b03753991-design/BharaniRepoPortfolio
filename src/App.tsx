@@ -8,6 +8,7 @@ import { ContactSection } from './sections/ContactSection';
 import { ParticleNetworkCanvas } from './components/ParticleNetworkCanvas';
 import { Mail, Phone, MapPin, ArrowUpRight, ArrowUp } from 'lucide-react';
 import { Github, Linkedin } from './components/SocialIcons';
+import { PORTFOLIO_DATA } from './portfolioData';
 import './App.css';
 
 const scrollTo = (id: string) =>
@@ -21,14 +22,9 @@ const NAV_LINKS = [
   { label: 'Contact',   id: 'contact' },
 ];
 
-const SOCIALS = [
-  { href: 'https://github.com/bharani',                               label: 'GitHub',   icon: <Github size={18} /> },
-  { href: 'www.linkedin.com/in/bharani-dharan-d-26624a293',  label: 'LinkedIn', icon: <Linkedin size={18} /> },
-  { href: 'mailto:bharani7224@gmail.com',                             label: 'Email',    icon: <Mail size={18} /> },
-];
-
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const profile = PORTFOLIO_DATA.profile;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,12 +56,8 @@ function App() {
 
       {/* ====== FOOTER ====== */}
       <footer className="site-footer">
-        {/* Wave divider */}
-        <div className="footer-wave">
-          <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#090d16" />
-          </svg>
-        </div>
+        {/* Subtle glowing top divider */}
+        <div className="footer-top-divider" />
 
         <div className="footer-body">
           <div className="container footer-grid">
@@ -85,12 +77,18 @@ function App() {
               </p>
               {/* Socials */}
               <div className="footer-socials">
-                {SOCIALS.map(({ href, label, icon }) => (
-                  <a key={label} href={href}
-                    target={href.startsWith('http') ? '_blank' : undefined}
-                    rel="noreferrer" aria-label={label}
-                    className="footer-social-btn">
-                    {icon}
+                {profile.socials.map((s) => (
+                  <a 
+                    key={s.platform} 
+                    href={s.url}
+                    target={s.url.startsWith('http') ? '_blank' : undefined}
+                    rel="noreferrer" 
+                    aria-label={s.label}
+                    className="footer-social-btn"
+                  >
+                    {s.platform === 'GitHub' && <Github size={18} />}
+                    {s.platform === 'LinkedIn' && <Linkedin size={18} />}
+                    {s.platform === 'Email' && <Mail size={18} />}
                   </a>
                 ))}
               </div>
@@ -116,21 +114,21 @@ function App() {
               <h4 className="footer-col-title">Get In Touch</h4>
               <ul className="footer-contact-list">
                 <li>
-                  <a href="mailto:bharani7224@gmail.com" className="footer-contact-item">
+                  <a href={`mailto:${profile.email}`} className="footer-contact-item">
                     <div className="footer-contact-icon"><Mail size={14} /></div>
-                    <span>bharani7224@gmail.com</span>
+                    <span>{profile.email}</span>
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+919360680467" className="footer-contact-item">
+                  <a href={`tel:${profile.phone.replace(/\s+/g, '')}`} className="footer-contact-item">
                     <div className="footer-contact-icon"><Phone size={14} /></div>
-                    <span>+91 93606 80467</span>
+                    <span>{profile.phone}</span>
                   </a>
                 </li>
                 <li>
                   <div className="footer-contact-item">
                     <div className="footer-contact-icon"><MapPin size={14} /></div>
-                    <span>Tamil Nadu, India</span>
+                    <span>{profile.location}</span>
                   </div>
                 </li>
               </ul>
@@ -146,8 +144,6 @@ function App() {
 
           {/* Divider */}
           <div className="footer-divider" />
-
-        
         </div>
       </footer>
       

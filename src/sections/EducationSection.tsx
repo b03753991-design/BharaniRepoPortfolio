@@ -1,81 +1,44 @@
 import React from 'react';
 import { GraduationCap, Briefcase, Calendar, MapPin } from 'lucide-react';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { PORTFOLIO_DATA } from '../portfolioData';
+import type { TimelineEntry } from '../portfolioData';
 import './EducationSection.css';
 
-interface TimelineItem {
-  type: string;
-  period: string;
-  title: string;
-  institution: string;
-  location: string;
-  desc: string;
-  grade?: string;
-  icon: React.ReactElement;
+interface TimelineCardProps {
+  item: TimelineEntry;
+  delay?: number;
 }
 
-const education = [
-  {
-    type: 'education',
-    period: '2023 – 2026',
-    title: 'BCA – Bachelor of Computer Applications',
-    institution: 'Erode Arts and Science College',
-    location: 'Erode, Tamil Nadu',
-    desc: 'Completed core courses in web design, databases, software development, and application management. Graduated with a CGPA of 7.36.',
-    grade: 'CGPA: 7.36',
-    icon: <GraduationCap size={20} />,
-  },
-];
+const TimelineCard: React.FC<TimelineCardProps> = ({ item, delay = 0 }) => {
+  const isEdu = item.type === 'education';
 
-const experience: TimelineItem[] = [
-  {
-    type: 'work',
-    period: 'Jan 2026 – Present',
-    title: 'Software Developer (6 Mos Completed)',
-    institution: 'NavaNala Technologies Private Limited',
-    location: 'Perundurai, Tamil Nadu',
-    desc: 'Developing dynamic web applications with clean frontend architectures, optimizing logic routines, and collaborating on full-stack features.',
-    icon: <Briefcase size={20} />,
-  },
-  {
-    type: 'internship',
-    period: 'Jul 2025 – Dec 2025',
-    title: 'MernStack Developer Intern',
-    institution: 'BlackStone Infomatics',
-    location: 'Coimbatore, Tamil Nadu',
-    desc: 'Collaborated in developing modern web applications using React.js, Node.js, Express.js, and MongoDB. Assisted in building responsive user interfaces, developing RESTful APIs, managing database operations, and working closely with the development team to deliver scalable full-stack solutions.',
-    icon: <Briefcase size={20} />,
-  },
-];
-
-const TimelineCard: React.FC<{
-  item: TimelineItem;
-  delay?: number;
-}> = ({ item, delay = 0 }) => (
-  <ScrollReveal animation="fade-up" delay={delay} triggerOnce>
-    <div className={`edu-card ${item.type === 'work' ? 'work-card' : 'study-card'}`}>
-      <div className="edu-card-icon">
-        {item.icon}
-      </div>
-      <div className="edu-card-body">
-        <div className="edu-card-meta">
-          <span className="edu-period">
-            <Calendar size={12} /> {item.period}
-          </span>
-          <span className="edu-location">
-            <MapPin size={12} /> {item.location}
-          </span>
+  return (
+    <ScrollReveal animation="fade-up" delay={delay} triggerOnce>
+      <div className={`edu-card ${isEdu ? 'study-card' : 'work-card'}`}>
+        <div className="edu-card-icon">
+          {isEdu ? <GraduationCap size={20} /> : <Briefcase size={20} />}
         </div>
-        <h4 className="edu-title">{item.title}</h4>
-        <span className="edu-institution">{item.institution}</span>
-        <p className="edu-desc">{item.desc}</p>
-        {item.grade && (
-          <span className="edu-grade">{item.grade}</span>
-        )}
+        <div className="edu-card-body">
+          <div className="edu-card-meta">
+            <span className="edu-period">
+              <Calendar size={12} /> {item.period}
+            </span>
+            <span className="edu-location">
+              <MapPin size={12} /> {item.location}
+            </span>
+          </div>
+          <h4 className="edu-title">{item.title}</h4>
+          <span className="edu-institution">{item.institution}</span>
+          <p className="edu-desc">{item.description}</p>
+          {item.grade && (
+            <span className="edu-grade">{item.grade}</span>
+          )}
+        </div>
       </div>
-    </div>
-  </ScrollReveal>
-);
+    </ScrollReveal>
+  );
+};
 
 export const EducationSection: React.FC = () => {
   return (
@@ -99,7 +62,7 @@ export const EducationSection: React.FC = () => {
               </div>
             </ScrollReveal>
             <div className="edu-timeline">
-              {education.map((item, i) => (
+              {PORTFOLIO_DATA.education.map((item, i) => (
                 <TimelineCard key={i} item={item} delay={i * 150} />
               ))}
             </div>
@@ -114,7 +77,7 @@ export const EducationSection: React.FC = () => {
               </div>
             </ScrollReveal>
             <div className="edu-timeline">
-              {experience.map((item, i) => (
+              {PORTFOLIO_DATA.experience.map((item, i) => (
                 <TimelineCard key={i} item={item} delay={i * 150} />
               ))}
             </div>

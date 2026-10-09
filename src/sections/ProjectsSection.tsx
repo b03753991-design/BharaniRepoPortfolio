@@ -2,42 +2,9 @@ import React, { useState } from 'react';
 import { ExternalLink, X, Sparkles, Filter, Layers, Server } from 'lucide-react';
 import { Github } from '../components/SocialIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { PORTFOLIO_DATA } from '../portfolioData';
+import type { ProjectEntry } from '../portfolioData';
 import './ProjectsSection.css';
-
-interface Project {
-  id: number;
-  title: string;
-  shortDesc: string;
-  longDesc: string;
-  category: 'frontend' | 'fullstack' | 'systems';
-  tags: string[];
-  features: string[];
-  demoUrl: string;
-  githubUrl: string;
-  highlights: string;
-  accentColor: string;
-}
-
-const projectsData: Project[] = [
-  {
-    id: 1,
-    title: 'Transport Management System',
-    shortDesc: 'A comprehensive logistics management hub tracking routes, fleet maintenance schedules, driver dispatch states, and fuel performance logs.',
-    longDesc: 'Designed to streamline transport business operations, this platform coordinates fleet dispatches, automates trip planning, logs fuel reports, and schedules maintenance notifications. It features dashboard metrics and printable invoice summaries.',
-    category: 'fullstack',
-    tags: ['C#', 'ASP.NET Web API', 'React.js', 'Tailwind CSS', 'PostgreSQL'],
-    features: [
-      'Real-time fleet route configurations and trip assignment flows.',
-      'Driver shift scheduling with workload validation logs.',
-      'Log maintenance audits tracking repairs, expenditures, and parts replacement cycles.',
-      'Interactive analytics dashboard displaying fuel efficiency indices and invoice graphs.',
-    ],
-    demoUrl: 'https://demo.bharani.dev/transport-system',
-    githubUrl: 'https://github.com/bharani/transport-management-system',
-    highlights: 'Logistics & Fleet Analytics',
-    accentColor: '#427b9b',
-  },
-];
 
 const FILTERS = [
   { key: 'all', label: 'All Work', icon: <Sparkles size={13} /> },
@@ -48,9 +15,10 @@ const FILTERS = [
 
 export const ProjectsSection: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'frontend' | 'fullstack' | 'systems'>('all');
-  const [selected, setSelected] = useState<Project | null>(null);
+  const [selected, setSelected] = useState<ProjectEntry | null>(null);
 
-  const filtered = filter === 'all' ? projectsData : projectsData.filter(p => p.category === filter);
+  const projects = PORTFOLIO_DATA.projects;
+  const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
 
   return (
     <section id="projects" className="projects-section">
@@ -88,7 +56,7 @@ export const ProjectsSection: React.FC = () => {
           {filtered.map((project, idx) => (
             <ScrollReveal key={project.id} animation="fade-up" delay={idx * 120} triggerOnce>
               <div className="proj-card" onClick={() => setSelected(project)}>
-                <div className="proj-card-accent" style={{ background: project.accentColor }} />
+                <div className="proj-card-accent" />
 
                 <div className="proj-badge">
                   <Sparkles size={11} /> {project.highlights}
@@ -126,7 +94,7 @@ export const ProjectsSection: React.FC = () => {
       {selected && (
         <div className="proj-modal-overlay" onClick={() => setSelected(null)}>
           <div className="proj-modal animate-fade-in" onClick={e => e.stopPropagation()}>
-            <div className="proj-modal-accent" style={{ background: selected.accentColor }} />
+            <div className="proj-modal-accent" />
             <button className="proj-modal-close" onClick={() => setSelected(null)} aria-label="Close">
               <X size={18} />
             </button>
@@ -146,6 +114,15 @@ export const ProjectsSection: React.FC = () => {
                     <li key={i}>{f}</li>
                   ))}
                 </ul>
+              </div>
+
+              <div className="proj-modal-section">
+                <h4>Technologies Used</h4>
+                <div className="proj-tags">
+                  {selected.tags.map((tag, i) => (
+                    <span key={i} className="proj-tag">{tag}</span>
+                  ))}
+                </div>
               </div>
 
               <div className="proj-modal-actions">

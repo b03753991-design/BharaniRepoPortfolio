@@ -2,39 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, Mail, Phone, Monitor, Database, Cpu } from 'lucide-react';
 import bharaniImg from '../assets/bharani.jpg';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { PORTFOLIO_DATA } from '../portfolioData';
 import './AboutSection.css';
 
-const skills = [
-  { name: 'C# & ASP.NET Web API', pct: 90, color: '#1b3358' },
-  { name: 'React.js & Tailwind CSS', pct: 92, color: '#427b9b' },
-  { name: 'Node.js & Express.js', pct: 86, color: '#98cbd0' },
-  { name: 'PostgreSQL & Oracle DB', pct: 84, color: '#2a5275' },
-  { name: 'MongoDB', pct: 80, color: '#1b3358' },
-];
-
-const services = [
-  {
-    icon: <Monitor size={22} />,
-    title: 'Frontend Engineering',
-    desc: 'Building responsive, highly-interactive user interfaces using React, TypeScript, and modern state-management.',
-  },
-  {
-    icon: <Database size={22} />,
-    title: 'Backend Systems',
-    desc: 'Designing stable REST APIs, serverless handlers, database schemas (SQL/NoSQL) and securing backend communications.',
-  },
-  {
-    icon: <Cpu size={22} />,
-    title: 'Performance & Optimization',
-    desc: 'Optimizing application bundles for lightning fast speeds — code splitting, caching, and static page builds.',
-  },
+const serviceIcons = [
+  <Monitor key="net" size={22} />,
+  <Database key="db" size={22} />,
+  <Cpu key="fe" size={22} />
 ];
 
 export const AboutSection: React.FC = () => {
   const [animated, setAnimated] = useState(false);
+  const profile = PORTFOLIO_DATA.profile;
+  const skills = PORTFOLIO_DATA.skillsPyramid;
+  const services = PORTFOLIO_DATA.services;
 
   useEffect(() => {
-    const timer = setTimeout(() => setAnimated(true), 400);
+    const timer = setTimeout(() => setAnimated(true), 350);
     return () => clearTimeout(timer);
   }, []);
 
@@ -64,26 +48,22 @@ export const AboutSection: React.FC = () => {
 
           <ScrollReveal animation="fade-left" delay={150} triggerOnce>
             <div className="about-bio">
-              <h3 className="about-bio-title">About <span> Bharani</span></h3>
-              <p className="about-bio-text">
-                I am a passionate software developer based in Tamil Nadu, India. With a deep focus on crafting interactive visual experiences, I love bridging the gap between pixel-perfect mockups and functional engineering.
-              </p>
-              <p className="about-bio-text">
-                My development processes center around responsiveness, clean logic architecture, and minimizing load times. I specialize in the modern web ecosystem, creating scalable React clients powered by Node backends.
-              </p>
+              {/* <h3 className="about-bio-title">About <span>{profile.name}</span></h3> */}
+              <p className="about-bio-text">{profile.bioAbout1}</p>
+              <p className="about-bio-text">{profile.bioAbout2}</p>
 
               <div className="about-info">
                 <div className="about-info-item">
                   <MapPin size={16} className="info-icon" />
-                  <span>Tamil Nadu, India</span>
+                  <span>{profile.location}</span>
                 </div>
                 <div className="about-info-item">
                   <Mail size={16} className="info-icon" />
-                  <span>bharani7224@gmail.com</span>
+                  <a href={`mailto:${profile.email}`}>{profile.email}</a>
                 </div>
                 <div className="about-info-item">
                   <Phone size={16} className="info-icon" />
-                  <span>+91 93606 80467</span>
+                  <a href={`tel:${profile.phone.replace(/\s+/g, '')}`}>{profile.phone}</a>
                 </div>
               </div>
             </div>
@@ -101,14 +81,14 @@ export const AboutSection: React.FC = () => {
                 <div key={i} className="skill-row">
                   <div className="skill-row-header">
                     <span className="skill-row-name">{skill.name}</span>
-                    <span className="skill-row-pct">{skill.pct}%</span>
+                    <span className="skill-row-pct">{skill.proficiency}%</span>
                   </div>
                   <div className="skill-track">
                     <div
                       className="skill-fill"
                       style={{
-                        width: animated ? `${skill.pct}%` : '0%',
-                        background: skill.color
+                        width: animated ? `${skill.proficiency}%` : '0%',
+                        background: 'var(--accent-gradient)'
                       }}
                     />
                   </div>
@@ -127,9 +107,11 @@ export const AboutSection: React.FC = () => {
             {services.map((svc, i) => (
               <ScrollReveal key={i} animation="fade-up" delay={i * 120} triggerOnce>
                 <div className="svc-card">
-                  <div className="svc-icon">{svc.icon}</div>
+                  <div className="svc-icon">
+                    {serviceIcons[i % serviceIcons.length]}
+                  </div>
                   <h4 className="svc-title">{svc.title}</h4>
-                  <p className="svc-desc">{svc.desc}</p>
+                  <p className="svc-desc">{svc.description}</p>
                 </div>
               </ScrollReveal>
             ))}

@@ -8,48 +8,54 @@ interface HomeProps {
   setCurrentPage: (page: string) => void;
 }
 
+const TITLES = [
+  'Full Stack Web Developer',
+  'React & Node.js Specialist',
+  'UI/UX Enthusiast',
+  'Innovative Problem Solver'
+];
+
 export const Home: React.FC<HomeProps> = ({ setCurrentPage }) => {
   const [typedText, setTypedText] = useState('');
   const [titleIndex, setTitleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const titles = [
-    'Full Stack Web Developer',
-    'React & Node.js Specialist',
-    'UI/UX Enthusiast',
-    'Innovative Problem Solver'
-  ];
+  const titles = TITLES;
 
   const typingSpeed = 100;
   const deletingSpeed = 50;
   const delayBetweenTitles = 2000;
 
   useEffect(() => {
-    let timer: any;
+    let timer: ReturnType<typeof setTimeout>;
     const currentFullText = titles[titleIndex];
 
     if (isDeleting) {
-      timer = setTimeout(() => {
-        setTypedText(currentFullText.substring(0, charIndex - 1));
-        setCharIndex((prev) => prev - 1);
-      }, deletingSpeed);
+      if (charIndex > 0) {
+        timer = setTimeout(() => {
+          setTypedText(currentFullText.substring(0, charIndex - 1));
+          setCharIndex((prev) => prev - 1);
+        }, deletingSpeed);
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(false);
+          setTitleIndex((prev) => (prev + 1) % titles.length);
+        }, 300);
+      }
     } else {
-      timer = setTimeout(() => {
-        setTypedText(currentFullText.substring(0, charIndex + 1));
-        setCharIndex((prev) => prev + 1);
-      }, typingSpeed);
-    }
-
-    if (!isDeleting && charIndex === currentFullText.length) {
-      timer = setTimeout(() => setIsDeleting(true), delayBetweenTitles);
-    } else if (isDeleting && charIndex === 0) {
-      setIsDeleting(false);
-      setTitleIndex((prev) => (prev + 1) % titles.length);
+      if (charIndex < currentFullText.length) {
+        timer = setTimeout(() => {
+          setTypedText(currentFullText.substring(0, charIndex + 1));
+          setCharIndex((prev) => prev + 1);
+        }, typingSpeed);
+      } else {
+        timer = setTimeout(() => setIsDeleting(true), delayBetweenTitles);
+      }
     }
 
     return () => clearTimeout(timer);
-  }, [charIndex, isDeleting, titleIndex]);
+  }, [charIndex, isDeleting, titleIndex, titles]);
 
   const serviceCards = [
     {
