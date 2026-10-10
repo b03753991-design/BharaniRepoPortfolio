@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTheme } from './context/ThemeContext';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './sections/HeroSection';
 import { EducationSection } from './sections/EducationSection';
@@ -6,6 +7,7 @@ import { ProjectsSection } from './sections/ProjectsSection';
 import { AboutSection } from './sections/AboutSection';
 import { ContactSection } from './sections/ContactSection';
 import { GravityStarsCanvas } from './components/GravityStarsCanvas';
+import { ParticleNetworkCanvas } from './components/ParticleNetworkCanvas';
 import { Mail, Phone, MapPin, ArrowUpRight, ArrowUp } from 'lucide-react';
 import { Github, Linkedin } from './components/SocialIcons';
 import { PORTFOLIO_DATA } from './portfolioData';
@@ -23,6 +25,7 @@ const NAV_LINKS = [
 ];
 
 function App() {
+  const { theme } = useTheme();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const profile = PORTFOLIO_DATA.profile;
 
@@ -44,7 +47,7 @@ function App() {
 
   return (
     <>
-      <GravityStarsCanvas />
+      {theme === 'dark' ? <GravityStarsCanvas /> : <ParticleNetworkCanvas />}
       <Navbar />
       <main>
         <HeroSection />

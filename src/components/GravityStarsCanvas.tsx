@@ -91,8 +91,8 @@ export const GravityStarsCanvas: React.FC = () => {
 
     // Arrays
     let stars: Star[] = [];
-    let shootingStars: ShootingStar[] = [];
-    let shockwaves: Shockwave[] = [];
+    const shootingStars: ShootingStar[] = [];
+    const shockwaves: Shockwave[] = [];
 
     // Particle density calculation
     const getStarCount = () => {
