@@ -27,11 +27,13 @@ export interface ProjectEntry {
   shortDesc: string;
   longDesc: string;
   category: 'frontend' | 'fullstack' | 'systems';
+  categoryLabel?: string;
   tags: string[];
   features: string[];
-  demoUrl: string;
-  githubUrl: string;
+  demoUrl?: string;
+  githubUrl?: string;
   highlights: string;
+  hasShine?: boolean;
 }
 
 export interface ServiceEntry {
@@ -144,7 +146,48 @@ export const PORTFOLIO_DATA = {
       ],
       demoUrl: 'https://demo.bharani.dev/transport-system',
       githubUrl: 'https://github.com/bharani/transport-management-system',
-      highlights: 'Logistics & Fleet Analytics'
+      highlights: 'Logistics & Fleet Analytics',
+      hasShine: true
+    },
+    {
+      id: 2,
+      title: 'Ledze Plus ERP',
+      shortDesc: 'An enterprise ERP application designed to streamline purchase and sales operations through approval-based workflows, quotation management, order processing, and invoice management.',
+      longDesc: 'An enterprise ERP application designed to streamline purchase and sales operations through approval-based workflows, quotation management, order processing, and invoice management. Integrates department authorization hierarchies, quotation life cycles, and reliable REST API data operations with PostgreSQL.',
+      category: 'fullstack' as const,
+      categoryLabel: 'Enterprise Resource Planning (ERP)',
+      tags: ['React.js', 'ASP.NET Core Web API', 'C#', 'Entity Framework Core', 'PostgreSQL'],
+      features: [
+        'Purchase requisition and department approval workflows.',
+        'Request for Quotation (RFQ) and vendor quotation management.',
+        'Purchase order, goods receipt, purchase invoice, and purchase return workflows.',
+        'Sales enquiry, costing, customer quotation, and sales order workflows.',
+        'Invoice processing and dispatch approval workflows.',
+        'REST API integration and database-driven business operations.'
+      ],
+      highlights: 'Enterprise ERP',
+      hasShine: true
+    },
+    {
+      id: 3,
+      title: 'LedzeePlus OCR – InvoiceFlow',
+      shortDesc: 'An invoice automation solution that processes PDF and image-based invoices, extracts structured invoice information through an OCR service, and tracks processing status and audit history.',
+      longDesc: 'An invoice automation solution that processes PDF and image-based invoices, extracts structured invoice information through an OCR service, and tracks processing status and audit history. Built with multi-file validation, asynchronous background queues, OCR parsing, and tenant-aware access control.',
+      category: 'systems' as const,
+      categoryLabel: 'Intelligent Invoice Processing / OCR Automation',
+      tags: ['React.js', 'ASP.NET Core Web API', 'C#', 'PostgreSQL', 'Background Services', 'OCR API', 'JWT Authentication'],
+      features: [
+        'Multi-file PDF and image uploads.',
+        'File validation, duplicate detection, and antivirus scanning.',
+        'Background queue processing with concurrent job execution.',
+        'OCR integration for invoice headers, line items, and totals.',
+        'PostgreSQL persistence for documents and extracted invoice data.',
+        'Retry handling, queue recovery, and processing status tracking.',
+        'Authentication, tenant-aware access control, and audit logging.',
+        'Frontend integration with batch status APIs.'
+      ],
+      highlights: 'OCR & Invoice Automation',
+      hasShine: true
     }
   ],
 

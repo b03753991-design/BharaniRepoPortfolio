@@ -227,7 +227,7 @@
   overflow: hidden;
 }
 
-.service-card::after {
+.service-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -239,7 +239,7 @@
   border-radius: 16px 16px 0 0;
 }
 
-.service-card:hover::after {
+.service-card:hover::before {
   transform: scaleX(1);
 }
 

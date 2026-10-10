@@ -5,7 +5,7 @@ import { EducationSection } from './sections/EducationSection';
 import { ProjectsSection } from './sections/ProjectsSection';
 import { AboutSection } from './sections/AboutSection';
 import { ContactSection } from './sections/ContactSection';
-import { ParticleNetworkCanvas } from './components/ParticleNetworkCanvas';
+import { GravityStarsCanvas } from './components/GravityStarsCanvas';
 import { Mail, Phone, MapPin, ArrowUpRight, ArrowUp } from 'lucide-react';
 import { Github, Linkedin } from './components/SocialIcons';
 import { PORTFOLIO_DATA } from './portfolioData';
@@ -44,7 +44,7 @@ function App() {
 
   return (
     <>
-      <ParticleNetworkCanvas />
+      <GravityStarsCanvas />
       <Navbar />
       <main>
         <HeroSection />

@@ -55,7 +55,19 @@ export const ProjectsSection: React.FC = () => {
         <div className="proj-grid">
           {filtered.map((project, idx) => (
             <ScrollReveal key={project.id} animation="fade-up" delay={idx * 120} triggerOnce>
-              <div className="proj-card" onClick={() => setSelected(project)}>
+              <div
+                className={`proj-card ${project.hasShine ? 'proj-card-shine' : ''}`}
+                onClick={() => setSelected(project)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelected(project);
+                  }
+                }}
+                tabIndex={0}
+                role="button"
+                aria-label={`View details for ${project.title}`}
+              >
                 <div className="proj-card-accent" />
 
                 <div className="proj-badge">
@@ -100,7 +112,7 @@ export const ProjectsSection: React.FC = () => {
             </button>
 
             <div className="proj-modal-header">
-              <span className="proj-modal-badge">{selected.category.toUpperCase()}</span>
+              <span className="proj-modal-badge">{(selected.categoryLabel || selected.category).toUpperCase()}</span>
               <h3>{selected.title}</h3>
             </div>
 
@@ -125,14 +137,20 @@ export const ProjectsSection: React.FC = () => {
                 </div>
               </div>
 
-              <div className="proj-modal-actions">
-                <a href={selected.demoUrl} target="_blank" rel="noreferrer" className="btn btn-primary">
-                  <ExternalLink size={16} /> Live Demo
-                </a>
-                <a href={selected.githubUrl} target="_blank" rel="noreferrer" className="btn btn-secondary">
-                  <Github size={16} /> Source Code
-                </a>
-              </div>
+              {(selected.demoUrl || selected.githubUrl) && (
+                <div className="proj-modal-actions">
+                  {selected.demoUrl && (
+                    <a href={selected.demoUrl} target="_blank" rel="noreferrer" className="btn btn-primary">
+                      <ExternalLink size={16} /> Live Demo
+                    </a>
+                  )}
+                  {selected.githubUrl && (
+                    <a href={selected.githubUrl} target="_blank" rel="noreferrer" className="btn btn-secondary">
+                      <Github size={16} /> Source Code
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

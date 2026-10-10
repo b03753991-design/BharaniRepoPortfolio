@@ -5,42 +5,14 @@ import { ScrollReveal } from '../components/ScrollReveal';
 import './Projects.css';
 
 
-interface Project {
-  id: number;
-  title: string;
-  shortDesc: string;
-  longDesc: string;
-  category: 'frontend' | 'fullstack' | 'systems';
-  tags: string[];
-  features: string[];
-  demoUrl: string;
-  githubUrl: string;
-  highlights: string;
-}
+import { PORTFOLIO_DATA } from '../portfolioData';
+import type { ProjectEntry } from '../portfolioData';
 
 export const Projects: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'frontend' | 'fullstack' | 'systems'>('all');
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectEntry | null>(null);
 
-  const projectsData: Project[] = [
-    {
-      id: 1,
-      title: 'Transport Management System',
-      shortDesc: 'A comprehensive logistics management hub tracking routes, fleet maintenance schedules, driver dispatch states, and fuel performance logs.',
-      longDesc: 'Designed to streamline transport business operations, this platform coordinates fleet dispatches, automates trip planning, logs fuel reports, and schedules maintenance notifications. It features dashboard metrics and printable invoice summaries.',
-      category: 'fullstack',
-      tags: ['C#', 'ASP.NET Web API', 'React.js', 'Tailwind CSS', 'PostgreSQL'],
-      features: [
-        'Real-time fleet route configurations and trip assignment flows.',
-        'Driver shift scheduling with workload validation logs.',
-        'Log maintenance audits tracking repairs, expenditures, and parts replacement cycles.',
-        'Interactive analytics dashboard displaying fuel efficiency indices and invoice graphs.'
-      ],
-      demoUrl: 'https://demo.bharani.dev/transport-system',
-      githubUrl: 'https://github.com/bharani/transport-management-system',
-      highlights: 'Logistics & Fleet Analytics'
-    }
-  ];
+  const projectsData = PORTFOLIO_DATA.projects;
 
   const filteredProjects = filter === 'all' 
     ? projectsData 
@@ -132,7 +104,7 @@ export const Projects: React.FC = () => {
             </button>
             
             <div className="modal-header">
-              <span className="modal-badge">{selectedProject.category.toUpperCase()}</span>
+              <span className="modal-badge">{(selectedProject.categoryLabel || selectedProject.category).toUpperCase()}</span>
               <h3>{selectedProject.title}</h3>
             </div>
 
@@ -158,14 +130,20 @@ export const Projects: React.FC = () => {
               </div>
             </div>
 
-            <div className="modal-actions">
-              <a href={selectedProject.demoUrl} target="_blank" rel="noreferrer" className="btn btn-primary">
-                Live Demo <ExternalLink size={14} />
-              </a>
-              <a href={selectedProject.githubUrl} target="_blank" rel="noreferrer" className="btn btn-secondary">
-                GitHub Repo <Github size={14} />
-              </a>
-            </div>
+            {(selectedProject.demoUrl || selectedProject.githubUrl) && (
+              <div className="modal-actions">
+                {selectedProject.demoUrl && (
+                  <a href={selectedProject.demoUrl} target="_blank" rel="noreferrer" className="btn btn-primary">
+                    Live Demo <ExternalLink size={14} />
+                  </a>
+                )}
+                {selectedProject.githubUrl && (
+                  <a href={selectedProject.githubUrl} target="_blank" rel="noreferrer" className="btn btn-secondary">
+                    GitHub Repo <Github size={14} />
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}

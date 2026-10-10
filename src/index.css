@@ -397,9 +397,114 @@ a {
   .filter-btn::after,
   .hs-back-to-top::after,
   .proj-modal-close::after,
-  .modal-close::after {
+  .modal-close::after,
+  .edu-card::after,
+  .study-card::after,
+  .work-card::after,
+  .proj-card::after,
+  .svc-card::after,
+  .skills-card::after,
+  .about-enjoy-list::after,
+  .contact-info-card::after,
+  .contact-form-card::after,
+  .project-card::after,
+  .service-card::after,
+  .timeline-card::after {
     display: none !important;
     animation: none !important;
+  }
+}
+
+/* ============================================================
+   UNIVERSAL CARD SHINE HOVER EFFECT
+   ============================================================ */
+.edu-card,
+.study-card,
+.work-card,
+.proj-card,
+.svc-card,
+.skills-card,
+.about-enjoy-list,
+.contact-info-card,
+.contact-form-card,
+.project-card,
+.service-card,
+.timeline-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Smooth light-sweep shine layer for cards */
+.edu-card::after,
+.study-card::after,
+.work-card::after,
+.proj-card::after,
+.svc-card::after,
+.skills-card::after,
+.about-enjoy-list::after,
+.contact-info-card::after,
+.contact-form-card::after,
+.project-card::after,
+.service-card::after,
+.timeline-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -140%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 20%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.03) 80%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+}
+
+/* Light mode adaptation for cards */
+[data-theme="light"] .edu-card::after,
+[data-theme="light"] .study-card::after,
+[data-theme="light"] .work-card::after,
+[data-theme="light"] .proj-card::after,
+[data-theme="light"] .svc-card::after,
+[data-theme="light"] .skills-card::after,
+[data-theme="light"] .about-enjoy-list::after,
+[data-theme="light"] .contact-info-card::after,
+[data-theme="light"] .contact-form-card::after,
+[data-theme="light"] .project-card::after,
+[data-theme="light"] .service-card::after,
+[data-theme="light"] .timeline-card::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(122, 28, 172, 0.03) 20%,
+    rgba(122, 28, 172, 0.18) 50%,
+    rgba(122, 28, 172, 0.03) 80%,
+    transparent 100%
+  );
+}
+
+/* Sweep animation trigger on card hover */
+@media (hover: hover) and (pointer: fine) {
+  .edu-card:hover::after,
+  .study-card:hover::after,
+  .work-card:hover::after,
+  .proj-card:hover::after,
+  .svc-card:hover::after,
+  .skills-card:hover::after,
+  .about-enjoy-list:hover::after,
+  .contact-info-card:hover::after,
+  .contact-form-card:hover::after,
+  .project-card:hover::after,
+  .service-card:hover::after,
+  .timeline-card:hover::after {
+    animation: buttonShineSweep 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
 }
 
