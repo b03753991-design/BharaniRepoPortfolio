@@ -51,7 +51,7 @@ export const PORTFOLIO_DATA = {
       'Clean Architecture Advocate',
       'Problem Solver'
     ],
-    statusPill: 'ASP.NET Developer Currently at NavaNala Technologies 8+ Months Experience',
+    statusPill: 'ASP.NET Developer Currently at NavaNala Technologies 10+ Months Experience',
     bioHero: 'I craft premium digital experiences — from pixel-perfect interfaces to robust back-end systems. Passionate about clean architecture and breathtaking UI.',
     bioAbout1: 'I am a Full-Stack .NET Developer based in Tamil Nadu, India, specializing in building scalable web applications with C#, ASP.NET Core, React, and PostgreSQL. I focus on delivering clean, maintainable code backed by solid architecture.',
     bioAbout2: 'My development process is anchored in Clean Architecture, REST API design, and real-world problem solving — from OCR-powered document processing to JWT-secured back-end systems. I enjoy turning complex requirements into reliable software.',
@@ -115,7 +115,7 @@ export const PORTFOLIO_DATA = {
     {
       type: 'work' as const,
       period: 'Jan 2026 – Present',
-      title: 'Software Developer (6 Mos Completed)',
+      title: 'Software Developer (10 Mos Completed)',
       institution: 'NavaNala Technologies Private Limited',
       location: 'Perundurai, Tamil Nadu',
       description: 'Developing dynamic web applications with clean frontend architectures, optimizing logic routines, and collaborating on full-stack features.'
